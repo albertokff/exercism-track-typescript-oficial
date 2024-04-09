@@ -1,0 +1,13 @@
+export function isLeap(yearLeap: number) {
+  if (yearLeap % 4 == 0 && yearLeap % 100 != 0) {    
+      return true;
+  } else if (yearLeap % 4 == 0 && yearLeap % 100 == 0) {
+    if (yearLeap % 400 == 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  return false;
+}

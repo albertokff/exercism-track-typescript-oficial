@@ -1,0 +1,25 @@
+export function toRna(dna: string[]): string {
+    let dnaComplete = '';
+  
+    for (var i = 0; i < dna.length; i++) {            
+      switch (dna[i]) {
+        case 'G':
+          dnaComplete += 'C'
+          break;
+        case 'C':
+          dnaComplete += 'G'
+          break;
+        case 'T':
+          dnaComplete += 'A'
+          break;
+        case 'A':
+          dnaComplete += 'U'
+          break;
+        default:
+          dnaComplete = '';
+          throw new Error("Invalid input DNA.");
+      }           
+    }
+  
+   return dnaComplete;
+}

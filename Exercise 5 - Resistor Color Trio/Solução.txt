@@ -1,0 +1,50 @@
+export enum ResistorValues {
+    black = 0,
+    brown = 1,
+    red = 2,
+    orange = 3,
+    yellow = 4,
+    green = 5,
+    blue = 6,
+    violet = 7,
+    grey = 8,
+    white = 9
+}
+
+type Color = keyof typeof ResistorValues
+
+export function decodedResistorValue([valueOne, valueTwo, valueThree]: Color[]): string {
+    let units: string = ' ohms';
+    let total: string = '';
+    let paramO: string = `${ResistorValues[valueOne]}`;
+    let paramS: string = `${ResistorValues[valueTwo]}`;
+    let paramT: string = `${ResistorValues[valueThree]}`;
+     
+    if (paramO == '0' && paramS == '0' && paramT == '0') {      
+      units = ' ohms'; 
+      total = '0';
+    } else if (paramO == '9' && paramS == '9' && paramT == '9') {
+       units = ' gigaohms';
+       total = paramO + paramS;
+    } else if (paramO == '0') {
+      total = paramS;
+    } else if (paramT == '0') {
+      total = paramO + paramS;      
+    } else if (paramT == '1') {
+      total = paramO + paramS + 0;       
+    } else if (paramT == '2') {
+      total = paramO;
+      units = ' kiloohms'
+    } else if (paramT == '3') {
+      total = paramO + paramS;
+      units = ' kiloohms'
+    } else if (paramT == '4') {
+      total = paramO + paramS + 0;
+      units = ' kiloohms'      
+    } else if (paramT == '6') {
+      total = paramO + paramS;
+      units = ' megaohms'
+    } 
+    
+    return total + units;
+}
