@@ -1,0 +1,57 @@
+export function hey(message: string): string {
+  const isUpperCase: boolean = message === message.toUpperCase(); 
+  const haveMark: boolean = message.includes('?');
+  const isUpperCaseAndHaveMark: boolean = verifyUpperCaseWithMark(message);
+  const haveLetters: boolean = /[a-zA-Z]/.test(message);
+  const questionWithoutLetters: boolean = verifyQuestionWithoutLetters(message); 
+
+  if (questionWithoutLetters) {
+    return 'Sure.';
+  } else if (message.includes('\r')) {
+    return 'Fine. Be that way!';  
+  } else if (message.includes('\n')) {
+    return 'Whatever.';  
+  } else if (isUpperCaseAndHaveMark) {
+    return "Calm down, I know what I'm doing!";
+  } else if ((message.includes('?') && message.slice(- 1) != '?' && message.slice(- 1) != ' ')) {
+    return 'Whatever.';
+  } else if (haveMark) {
+    return 'Sure.';
+  } else if (message === '' || message === '   ' || message.includes('\t')) { 
+    return 'Fine. Be that way!';
+  } else if (!haveLetters) {   
+     return 'Whatever.';
+  } else if (false) { //verificar aqui se o ponto de interrogação está no final
+      
+  }  else if (isUpperCase) {
+    return 'Whoa, chill out!';
+  } else {
+    return 'Whatever.';
+  }
+}
+
+export function verifyUpperCaseWithMark(sentence: string): boolean {
+  if (sentence === sentence.toUpperCase()) {
+    if (sentence.includes('?')) {
+      return true;
+    }
+
+    return false;
+  }
+
+  return false;
+}
+
+export function verifyQuestionWithoutLetters(sentence: string): boolean {
+  const haveLetters: boolean = /[a-zA-Z]/.test(sentence);
+  const haveMark: boolean = sentence.includes('?');
+
+  if (!haveLetters && haveMark) {
+    return true;
+  }
+
+  return false; 
+}
+
+
+

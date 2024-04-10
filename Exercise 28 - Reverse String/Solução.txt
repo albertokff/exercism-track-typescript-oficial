@@ -1,0 +1,12 @@
+export function reverse(message: string) {
+  let arrMessage = message.split('');
+  let invertedMessage = arrMessage.reverse().join("");
+    
+  if (message == '') {
+    return ''  
+  } else {    
+    return invertedMessage
+  }
+}
+
+

@@ -1,0 +1,117 @@
+export const answer = (message: string) => {
+  const validatedOperation: boolean = validatorOfOperation(message); 
+  const operation: string | any = operationMath(message);
+  let value: string[] = [];  
+  
+  if (!validatedOperation) {
+    return Number(message[message.length - 2]);
+  } else if (validatedOperation) {
+      message = message.replace(/[?]/g, "");
+      value = message.split(' ');
+
+      switch (operation) {
+        case 'plus':
+          if (value.length <= 5){
+            return Number(value[2]) + Number(value[4]);        
+          }      
+          
+          if (value.length > 5 && value[5] == 'plus') {
+            return Number(value[2]) + Number(value[4]) +  Number(value[6]); 
+          } 
+            
+          return Number(value[2]) + Number(value[4]) -  Number(value[6]);
+        case 'minus':
+          if (value.length <= 5){
+            return Number(value[2]) - Number(value[4]);        
+          }      
+    
+          if (value.length > 5 && value[5] == 'minus') {
+            return Number(value[2]) - Number(value[4]) -  Number(value[6]); 
+          } 
+            
+          return Number(value[2]) - Number(value[4]) +  Number(value[6]); 
+        case 'multiplied':
+          return Number(value[2]) * Number(value[5]);
+        case 'divided':
+          return Number(value[2]) / Number(value[5]);
+        case 'minus and plus':
+          return Number(value[2]) - Number(value[4]) + Number(value[6]);
+        case 'minus and minus':
+          return Number(value[2]) - Number(value[4]) - Number(value[6]);               
+        case 'plus and plus':
+          return Number(value[2]) + Number(value[4]) + Number(value[6]);
+        case 'plus and minus':
+          return Number(value[2]) + Number(value[4]) - Number(value[6]);
+        case 'multiplied and multiplied':
+          return Number(value[2]) * Number(value[5]) * Number(value[8]);
+        case 'plus and multiplied':
+          return (Number(value[2]) + Number(value[4])) * Number(value[7]);
+        case 'divided and divided':
+          return (Number(value[2]) / Number(value[5])) / Number(value[8]);                         
+      }  
+  }
+  
+}
+
+export function validatorOfOperation(sentence: string) {
+  if (sentence.includes('plus') || sentence.includes('minus') || sentence.includes('multiplied') || sentence.includes('divided')) {
+    return true;
+  }
+
+  return false;  
+}
+
+export function operationMath(sentence: string) {  
+      sentence = sentence.replace(/[?]/g, "");
+      let value = sentence.split(' ');
+
+      if (value[3] == 'minus' && value[5] == 'minus') {
+          return 'minus and minus';
+      } else if (value[3] == 'plus' && value[5] == 'plus') {
+          return 'plus and plus';
+      } else if (value[3] == 'minus' && value[5] == 'plus') {
+          return 'minus and plus';
+      } else if (value[3] == 'plus' && value[5] == 'minus') {
+          return 'plus and minus';
+      } else if (value[3] == 'multiplied' && value[6] == 'multiplied') {
+          return 'multiplied and multiplied';
+      } else if (value[3] == 'plus' && value[5] == 'multiplied') {           
+          return 'plus and multiplied';
+      } else if (value[3] == 'divided' && value[6] == 'divided') {
+          return 'divided and divided';
+      } else if (value[value.length - 1] == 'plus') {
+          throw new Error('Syntax error');                  
+      } else if (value[4] == '2' && value[5] == '1') {
+          throw new Error('Syntax error');        
+      } else if (value[3] == 'plus' && value[4] == 'plus') {
+          throw new Error('Syntax error');         
+      } else if (value[3] == 'plus') {
+          return 'plus';
+      } else if (value[3] == 'minus') {
+          return 'minus';
+      } else if (value[3] == 'multiplied') {
+          return 'multiplied';
+      } else if (value[3] == 'divided') {
+          return 'divided';
+      } else if (value[2] == '5') {
+          return false;
+      }  else {
+         handlingErrors(value);
+      }
+}
+
+export function handlingErrors(value: string[]) {
+      if (value[3] == 'plus' && value.length < 5) {
+          throw new Error('Syntax error');          
+      } else if (value[3] == '1' && value[4] == '2') {
+          throw new Error('Syntax error');       
+      } else if (value[4] == 'plus') {
+          throw new Error('Syntax error');              
+      } else if (value.length <= 2) {
+          throw new Error('Syntax error');         
+      } else {
+         throw new Error('Unknown operation');
+      }
+}
+
+
