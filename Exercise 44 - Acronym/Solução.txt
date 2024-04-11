@@ -1,0 +1,17 @@
+export function parse(phrase: string): string {
+    let separators = ['-', ' ', 'T'];  
+    let arrphrase = phrase.split(new RegExp('(['+ separators.join(' ') + '])'));      
+    let siglas = '';
+  
+    for (let i = 0; i < arrphrase.length; i++) {        
+        siglas += arrphrase[i][0].toUpperCase();        
+        siglas = siglas.replace('-', '');
+        siglas = siglas.replace('E', '');
+        siglas = siglas.trim();        
+    }
+  
+    return siglas;
+}
+
+
+

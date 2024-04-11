@@ -1,0 +1,26 @@
+export const arrNucleotideosValids = ['A', 'C', 'G', 'T'];
+
+
+export function nucleotideCounts(message: string) {
+  const arrMessage = message.split('');
+  let qtdA = 0;
+  let qtdC = 0;
+  let qtdG = 0;
+  let qtdT = 0;
+
+  for (var i = 0; i < arrMessage.length; i++) {
+    if (arrMessage[i] == 'A') {
+      qtdA++;
+    } else if (arrMessage[i] == 'C') {
+      qtdC++;
+    } else if (arrMessage[i] == 'G') {
+      qtdG++;
+    } else if (arrMessage[i] == 'T') {
+      qtdT++;
+    } else {
+      throw new Error("Invalid nucleotide in strand");
+    }
+  } 
+  
+  return {"A": qtdA, "C": qtdC, "G": qtdG, "T": qtdT};
+}

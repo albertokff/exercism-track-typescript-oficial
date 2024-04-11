@@ -1,0 +1,80 @@
+//
+// This is only a SKELETON file for the 'Bank Account' exercise. It's been provided as a
+// convenience to get you started writing code faster.
+//
+
+export class ValueError extends Error {
+  constructor() {
+    super('Bank account error')
+  }
+}
+
+export class BankAccount {
+  private _balance = 0;
+  private _newAccount = false;
+  private _accountClosed = false;
+  
+  constructor() {
+    this._balance = 0;
+    this._newAccount = false;
+  }
+
+  open(): void {
+    if (this._accountClosed) {
+      this._balance = 0;
+      this._accountClosed = !this._accountClosed;
+    }
+    
+    if (!this._newAccount) {
+      this._newAccount = true;
+    } else {
+      throw new ValueError();
+    }
+  }
+
+  close(): void {
+    if (this._accountClosed) {
+      throw new ValueError();  
+    }
+
+    if (!this._newAccount) {
+      throw new ValueError();
+    }
+    
+    this._accountClosed = true;
+    this._newAccount = false;
+    this._balance = 0;
+  }
+
+  deposit(value: number): void {
+    if (this._accountClosed) {
+      throw new ValueError();
+    }
+
+    if (value <= 0) {
+      throw new ValueError();
+    }
+    
+    this._balance += value;
+  }
+
+  withdraw(value: number) {
+    if (this._accountClosed || value > this._balance || value <= 0) {
+      throw new ValueError();
+    }   
+    
+    this._balance -= value;
+  }
+
+  public get balance(): number{    
+    if (this._newAccount && !this._accountClosed) {      
+      return this._balance;
+    }
+
+    if (this._accountClosed) {
+      throw new ValueError();
+    }
+
+    return this._balance;
+  }
+}
