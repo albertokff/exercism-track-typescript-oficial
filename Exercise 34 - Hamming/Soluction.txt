@@ -1,0 +1,21 @@
+export function compute(left: string, right: string): number | string {
+  const arrLeft = left.split('');
+  const arrRight = right.split('');
+  let countHeaming = 0;
+  
+  if (left == right) {
+    return 0;
+  }
+
+  if (left.length != right.length) {
+    throw new Error('DNA strands must be of equal length.')
+  }
+
+  for (var i = 0; i < left.length; i++) {
+    if (!(arrLeft[i] == arrRight[i])) {
+      countHeaming++;
+    }
+  }
+  
+  return countHeaming;
+}

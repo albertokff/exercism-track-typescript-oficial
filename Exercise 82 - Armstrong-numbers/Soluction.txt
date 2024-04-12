@@ -1,0 +1,28 @@
+export function isArmstrongNumber(value: number) {
+    const potencia = value.toString().length;
+
+    if (potencia == 2){
+       return false;   
+    } 
+
+    return numberValidated(value, potencia);      
+}
+
+export function numberValidated(value: number, elevated: number): boolean {
+    const arrValue = value.toString().split('');
+    const lastNumberArmstrong = '115132219018763992565095597973971522401';
+    const armstrongWith7Zeros = '186709961001538790100634132976990';
+    let total = 0;   
+
+  for (var i = 0; i < elevated; i++) {      
+      total += Math.pow(Number(arrValue[i]), elevated);
+    }
+
+    if (value.toString() == lastNumberArmstrong || 
+        value.toString() == armstrongWith7Zeros || 
+        total == Number(value)) {
+          return true;
+    }
+
+  return false;
+}
