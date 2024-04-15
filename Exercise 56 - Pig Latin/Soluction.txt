@@ -1,0 +1,70 @@
+export function translate(message: string) {
+    
+  if (message.includes(' ')) {
+    return translateMultipleWord(message)
+  } else {
+    return translateSimpleWord(message)
+  }
+}
+
+export function translateSimpleWord(message: string): string {
+  let arrMessage = message.toLowerCase().split('');
+  let messageModified = '';
+  let firstLetter = '';
+  const vogais = ['a', 'e', 'i', 'o', 'u'];
+  const groupLettersTwo = ['sq', 'sc', 'th', 'ch', 'qu', 'th']  
+  const groupLettersThree = ['thr', 'sch', 'squ']
+  const firstLetterTwo = arrMessage[0] + arrMessage[1];
+  const firstLetterThree = arrMessage[0] + arrMessage[1] + arrMessage[2];
+    
+  if (vogais.includes(arrMessage[0])) {
+    return message + 'ay';
+  } else if (groupLettersThree.includes(firstLetterThree)) {
+    firstLetter = arrMessage[0] + arrMessage[1] + arrMessage[2];
+    messageModified = message.substring(3);
+
+    return messageModified + firstLetter + 'ay';
+  } else if (groupLettersTwo.includes(firstLetterTwo)) {
+    firstLetter = arrMessage[0] + arrMessage[1];
+    messageModified = message.substring(2);
+
+    return messageModified + firstLetter + 'ay';
+  } else {
+    firstLetter = arrMessage.shift() + 'ay';
+    messageModified = message.substring(1);    
+
+    return messageModified + firstLetter;
+  }
+}
+
+export function translateMultipleWord(message: string): string {
+  let arrMessage = message.toLowerCase().split(' ')
+  let arrMessageOfMessage = []
+  let arrFormatado = '';
+  let messageModified = '';
+  let firstLetter = '';
+  const groupLettersTwo = ['sq', 'sc', 'th', 'ch', 'qu', 'th']
+  let firstLetterTwo: any = []
+  const vogais = ['a', 'e', 'i', 'o', 'u'];
+
+  for (var i = 0; i < arrMessage.length; i++) {
+    firstLetterTwo = arrMessage[i][0] + arrMessage[i][1]; 
+    
+    if (vogais.includes(arrMessage[i][0])) {
+      arrFormatado += arrMessage[i] + 'ay' + ' ';            
+    } else if (groupLettersTwo.includes(firstLetterTwo)) {
+      firstLetter = arrMessage[i][0] + arrMessage[i][1];
+      arrFormatado += arrMessage[i].substring(2) + firstLetter + 'ay' + ' ';        
+    } else {
+      arrMessageOfMessage[i] = arrMessage[i].toLowerCase().split('');
+      
+      firstLetter = arrMessageOfMessage[i].shift() + 'ay';
+      arrFormatado += arrMessage[i].substring(1) + firstLetter + ' ';    
+    }
+  }
+
+  arrFormatado = arrFormatado.slice(0, -1);
+  
+  return arrFormatado;
+}
+

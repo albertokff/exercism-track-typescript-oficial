@@ -1,0 +1,67 @@
+export function valid(digitString: string): boolean|number|string {
+  if (digitString.length == 1) {
+    return false;
+  }
+
+  if (digitString.length == 2) {
+    if (digitString == ' 0') {
+      return false;
+    }
+    
+    let digitSecond = Number(digitString[0]);
+    let resultado = (digitSecond * 2) > 9 ? (digitSecond * 2) - 9 : digitSecond * 2;
+    let soma = resultado + Number(digitString[1]);
+
+    if (soma % 10 === 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  if (digitString.length == 3) {
+    let digitSecond = Number(digitString[1]);
+    let resultado = (digitSecond * 2) > 9 ? (digitSecond * 2) - 9 : digitSecond * 2;
+    let soma = resultado + Number(digitString[0]) + Number(digitString[2])
+        
+    if (soma % 10 === 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  if (digitString.includes(' ')) {
+    let arrDigitString = digitString.replace(/\s/g, '');        
+    let digitSecond = 0;
+    let soma = 0;
+        
+    for (var i = arrDigitString.length - 1; i > 0; i--) {
+      i--
+      soma += Number(arrDigitString[i]) * 2 > 9 ? (Number(arrDigitString[i]) * 2) - 9 : Number(arrDigitString[i]) * 2 
+      console.log('a soma está valendo: ' + soma + 'numero: ' + arrDigitString[i])
+    }
+
+    for (var j = arrDigitString.length; j > 0; j--) {
+      j--
+      soma += Number(arrDigitString[j])
+      console.log('a soma vale: ' + soma + 'numero: ' + arrDigitString[j])
+    }    
+
+    console.log(soma)
+
+    if (soma % 10 === 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  return false;
+}
+
+export function validateCharacters(message: string) {
+
+}
+
+
